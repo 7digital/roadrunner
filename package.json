@@ -6,7 +6,6 @@
   "preferGlobal": true,
   "bin": "./bin/runner.js",
   "dependencies": {
-    "msdos-commands": "git+ssh://git@gitorious.7digital.local:jake/msdos-commands.git#master",
     "remote-control": "git+ssh://git@gitorious.7digital.local:jake/remote-control.git#master",
     "chain-of-command": "git://github.com/raoulmillais/chain-of-command.git#master",
     "text-streams": "git://github.com/raoulmillais/text-streams.git#master",
