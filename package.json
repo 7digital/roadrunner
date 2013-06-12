@@ -20,7 +20,7 @@
     "mocha": "~1.8.1"
   },
   "scripts": {
-    "test": "mocha --ignore-leaks -R spec spec"
+    "test": "mocha --ignore-leaks -R spec test"
   },
   "repository": {
     "type": "git",
