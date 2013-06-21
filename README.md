@@ -15,12 +15,23 @@ then roadrunner will exit with an error before doing anything.
 **Note** Accessing properties that are missing from config will result in
 'undefined' in the command string (obviously!)
 
-## Installation and invocation
+## Installation
+
+**roadrunner has not been published yet - it will be soon when it's had**
+**some more thorough internal usage - please run from a clone for now.**
 
 Roadrunner is a node (>0.8) program and should be installed globally via `npm`
 
 ```
 [sudo] npm install -qg roadrunner
+```
+
+Or you can run the most recent code:
+
+```
+git clone git://github.com/7digital/roadrunner.git
+cd roadrunner
+[sudo] npm link
 ```
 
 **Note** if you are running roadrunner from a unix machine and targetting
@@ -85,7 +96,7 @@ foo2.acme.com
 
 ## Scripts
 
-A simple promise-like DSL is provided to wrap up any DOS commands in cleaner
+A simple little DSL is provided to wrap up any DOS commands in cleaner
 syntax with simpler control flow.  Each script is parsed once per remote server
 (and/or local) and the config, environment and the DSL are available to your
 scripts and arranged to contain the correct values for the environment they are
