@@ -1,7 +1,7 @@
 {
   "name": "roadrunner",
   "version": "0.0.1",
-  "description": "Command line tool for deploying websites to iis",
+  "description": "Command line tool for running scripts in lots of places",
   "private": true,
   "preferGlobal": true,
   "bin": "./bin/runner.js",
