@@ -1,5 +1,7 @@
 # Road Runner
 
+[![Build Status](https://travis-ci.org/7digital/roadrunner.png?branch=master)](http://travis-ci.org/7digital/roadrunner)
+
 ## Introduction
 
 It will run scripts on remote servers which can be passed configuration from a
