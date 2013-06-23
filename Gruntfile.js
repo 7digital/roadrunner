@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 			all: {
 				src: 'test/*.js',
 				options: {
-					globals: [ 'chain', '$' ],
+					globals: [ 'chain', '$', 'config', 'server' ],
 					ignoreleaks: true,
 					ui: 'bdd',
 					reporter: 'spec'
