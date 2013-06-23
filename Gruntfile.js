@@ -25,17 +25,29 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+		complexity: {
+			generic: {
+				src: ['lib/**/*.js' ],
+				options: {
+					errorsOnly: false, // show only maintainability errors
+					cyclomatic: 5,
+					halstead: 15,
+					maintainability: 100
+				}
+			}
+		},
 		watch: {
 			files: [ '**/*.js' ],
-			tasks: [ 'jshint', 'simplemocha' ]
+			tasks: [ 'jshint', 'simplemocha', 'complexity' ]
 		}
 	});
 
 
 	grunt.loadNpmTasks('grunt-simple-mocha');
+	grunt.loadNpmTasks('grunt-complexity');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-notify');
 
-	grunt.registerTask('default', [ 'jshint', 'simplemocha' ]);
+	grunt.registerTask('default', [ 'jshint', 'simplemocha', 'complexity' ]);
 };
