@@ -18,7 +18,7 @@ logger.log(optionParser.banner);
 
 if (options.help) {
 	console.log(optionParser.showHelp());
-	return process.exit(0);
+	process.exit(0);
 }
 
 var batchOptions = {
