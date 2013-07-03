@@ -130,7 +130,7 @@ which should only run if the previous command exited successfully.
 ``or`` - Function that takes a string or another function (same behaviour),
 which should only run if the previous command failed to exit successfully.
 
-``then`` - Function that takes a string or another function (same behaviour),
+``always`` - Function that takes a string or another function (same behaviour),
 which should always run.
 
 ``ok`` - Function that takes no arguments and indicates that the exit status of
