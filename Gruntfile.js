@@ -1,23 +1,29 @@
-module.exports = function (grunt) {
+var fs = require('fs');
+
+module.exports = function configureTasks(grunt) {
+	var allFiles = [ '*.js', 'lib/**/*.js', 'test/**/*.js', 'bin/*.js' ];
+	var sourceFiles = [ 'lib/**/*.js' ];
+	var testFiles = [ 'test/*.js' ];
+
 	grunt.initConfig({
+		jsvalidate: {
+			files: allFiles
+		},
 		jshint: {
-			files: [
-				'Gruntfile.js',
-				'index.js',
-				'lib/**/*.js',
-				'test/**/*.js',
+			files: allFiles.concat([
 				'!test/fakes/*.js',
-				'!test/fixtures/*.js',
-				'bin/**'
-			],
+				'!test/fixtures/*.js'
+			]),
 			options: {
 				jshintrc: '.jshintrc'
 			}
 		},
 		simplemocha: {
 			all: {
-				src: 'test/*.js',
+				src: testFiles,
 				options: {
+					// simplemocha doesn't appear to ignore leaks regardless
+					// of the config
 					globals: [ 'chain', '$', 'config', 'server' ],
 					ignoreleaks: true,
 					ui: 'bdd',
@@ -26,10 +32,10 @@ module.exports = function (grunt) {
 			}
 		},
 		complexity: {
-			generic: {
-				src: ['lib/**/*.js' ],
+			all: {
+				src: sourceFiles,
 				options: {
-					errorsOnly: false, // show only maintainability errors
+					errorsOnly: false,
 					cyclomatic: 5,
 					halstead: 15,
 					maintainability: 100
@@ -37,17 +43,22 @@ module.exports = function (grunt) {
 			}
 		},
 		watch: {
-			files: [ '**/*.js' ],
+			files: allFiles,
 			tasks: [ 'jshint', 'simplemocha', 'complexity' ]
 		}
 	});
 
+	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-	grunt.loadNpmTasks('grunt-simple-mocha');
-	grunt.loadNpmTasks('grunt-complexity');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-notify');
+	grunt.registerTask('default', [
+		'jsvalidate',
+		'jshint',
+		'simplemocha',
+		'complexity'
+	]);
 
-	grunt.registerTask('default', [ 'jshint', 'simplemocha', 'complexity' ]);
+	grunt.registerTask('setupdev', function installGitHooks() {
+		fs.writeFileSync('.git/hooks/pre-commit', 'grunt');
+		fs.chmodSync('.git/hooks/pre-commit', '755');
+	});
 };

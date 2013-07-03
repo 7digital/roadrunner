@@ -197,4 +197,8 @@ Chain Events
 - command complete
 - complete
 
+## Hacking
 
+I'm using Grunt for build automation, run `grunt setupdev` to install git
+hooks. See the CONTRIBUTING document for details on the development workflow, I
+like to adhere to.
