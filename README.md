@@ -133,6 +133,10 @@ which should only run if the previous command failed to exit successfully.
 ``then`` - Function that takes a string or another function (same behaviour),
 which should always run.
 
+``ok`` - Function that takes no arguments and indicates that the exit status of
+the last command should be ignored.  I.E. roadrunner will continue to execute
+subsequent chains even if the current one terminates with a failure status.
+
 ## Commandline Options
 
 roadrunner can then be invoked with the following options
