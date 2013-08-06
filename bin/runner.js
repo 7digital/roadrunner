@@ -36,12 +36,8 @@ var batch = new Batch(batchOptions);
 logger.attach(batch);
 batch.run(function batchComplete(err) {
 	if (err) {
-		if (/Error/.test(err.toString())) {
-			logger.error(err.message);
-		}
-
-		logger.log(err);
+		logger.log('Run failed');
+	} else {
+		logger.log('Run successful');
 	}
-
-	logger.log('done');
 });

@@ -198,6 +198,43 @@ describe('Target', function () {
 			});
 		});
 
+		it('should emit error when chain errors', function (done) {
+			var errorEventEmitted = false;
+			var target = new Target();
+
+			target.dispatcher = function fakeDispatcher(command, callback) {
+				callback(new Error('command errored!'));
+			};
+
+			target.addChain("echo hello");
+
+			target.on('error', function (err) {
+				errorEventEmitted = true;
+				assert.equal(err.message, 'command errored!');
+				done();
+			});
+
+			target.run(function () {});
+		});
+
+		it('should callback error when chain errors', function (done) {
+			var errorEventEmitted = false;
+			var target = new Target();
+			var errorMessage = 'command errored!';
+
+			target.dispatcher = function fakeDispatcher(command, callback) {
+				callback(new Error(errorMessage));
+			};
+
+			target.addChain('echo hello');
+
+			target.on('error', function () {}); // prevent throwing when error event not bound to
+
+			target.run(function (err) {
+				assert.equal(err.message, errorMessage);
+				done();
+			});
+		});
 	});
 
 	describe('context properties', function () {
