@@ -190,12 +190,14 @@ Target Events
 - starting
 - chain
 - complete
+- error
 
 Chain Events
 
 - command dispatching
 - command complete
 - complete
+- error
 
 ## Hacking
 

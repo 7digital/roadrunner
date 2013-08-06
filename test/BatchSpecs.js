@@ -170,7 +170,7 @@ describe('Batch', function () {
 			});
 		});
 
-		it('should emit a starting event', function (done) {
+		it('should emit a complete event', function (done) {
 			var completeEmitted = false;
 			var batch = new Batch({
 				connections: []
@@ -182,6 +182,35 @@ describe('Batch', function () {
 
 			batch.run(function batchComplete() {
 				assert.ok(completeEmitted);
+				done();
+			});
+		});
+
+		it('should emit error event and callback error when target errors', function (done) {
+			var batch = new Batch({
+				connections: []
+			});
+			var erroringTarget = new Target();
+			var errorMessage = 'command errored!';
+
+			erroringTarget.dispatcher = function fakeDispatcher(command, callback) {
+				callback(new Error(errorMessage));
+			};
+
+			erroringTarget.addChain('echo hello');
+			erroringTarget.chains[0].and('echo hello again');
+			erroringTarget.on('error', function () {}); // prevent throwing when error event not bound to
+
+			batch.addTarget(erroringTarget);
+
+			var emittedError;
+			batch.on('error', function (err) {
+				emittedError = err;
+			});
+
+			batch.run(function batchComplete(err) {
+				assert.equal(emittedError.message, errorMessage);
+				assert.equal(err.message, errorMessage);
 				done();
 			});
 		});
