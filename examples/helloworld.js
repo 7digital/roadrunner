@@ -1,2 +1,2 @@
 $("echo hello")
-	.then("echo world");
+	.and("echo world");
