@@ -37,7 +37,9 @@ logger.attach(batch);
 batch.run(function batchComplete(err) {
 	if (err) {
 		logger.log('Run failed');
+		process.exit(1);
 	} else {
 		logger.log('Run successful');
+		process.exit(0);
 	}
 });
