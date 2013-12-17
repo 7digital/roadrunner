@@ -7,7 +7,7 @@ module.exports = function configureTasks(grunt) {
 
 	grunt.initConfig({
 		jsvalidate: {
-			files: allFiles
+			files: [ 'lib/**/*.js' ]
 		},
 		jshint: {
 			files: allFiles.concat([
