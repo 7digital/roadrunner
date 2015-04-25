@@ -3,6 +3,9 @@ node_js:
   - "0.10"
   - "0.8"
 
+before_install:
+  - npm update npm -g
+
 notifications:
   recipients:
     - direct-tech+travis@7digital.com
